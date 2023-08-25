@@ -8,7 +8,7 @@ const handlePending = state => {
 const handleRejected = (state, action) => {
     state.isLoading = false;
     state.error = action.payload;
-  };
+};
 
 const contactsSlice = createSlice({
     name: 'contacts',
@@ -37,8 +37,7 @@ const contactsSlice = createSlice({
             .addCase(deleteContact.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.error = null;
-                const index = state.items.findIndex(contact => contact.id === action.payload);
-                state.items.splice(index, 1);
+                state.items.filter(contact => contact.name !== action.payload);
             })
             .addCase(deleteContact.rejected, handleRejected)
     },
