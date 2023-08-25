@@ -1,13 +1,14 @@
 import { ListContainer, StyledList, Contact, Name, ButtonDelete, Number } from "./contactList.styled";
 import { useSelector, useDispatch } from "react-redux";
-import { getVisibleContacts } from "redux/selectors";
+import { getFilterValue, getContacts} from "redux/selectors";
 import { deleteContact } from "redux/operations";
 
 
 export const ContactList = () => {
     const dispatch = useDispatch();
-    const visibleContacts = useSelector(getVisibleContacts);
-    
+    const filter = useSelector(getFilterValue);
+    const contacts = useSelector(getContacts);
+    const visibleContacts = filter ? contacts.items.filter(item => item.name.toLowerCase().includes(filter.toLowerCase())) : contacts.items;
 
     return (
         <ListContainer>

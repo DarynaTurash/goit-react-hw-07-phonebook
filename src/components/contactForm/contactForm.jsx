@@ -6,6 +6,8 @@ import { addContact } from 'redux/operations';
 import { getContacts } from 'redux/selectors';
 
 
+
+
 const validationSchema = Yup.object().shape({
     name: Yup.string()
       .matches(
@@ -35,7 +37,7 @@ export const ContactForm = () => {
                 validationSchema={validationSchema}
                 
                 onSubmit={(values, action) => {
-                const contactExist = contacts.items.some(contact => contact.name.toLowerCase().includes(values.name.toLowerCase()));
+                const contactExist = contacts.items.some(contact => contact.name.toLowerCase().includes(values.name));
                 const newContact = { ...values };
 
                 if(contactExist) {
